@@ -1,0 +1,6 @@
+{
+  "name": "Modern Chennai Port - Porter Game",
+  "description": "An interactive educational logistics adventure where children learn multiplication, division, and cargo handling from factory to ship and godown.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
