@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Award, Star, Coins, RotateCcw, Printer, CheckCircle2, Trophy } from 'lucide-react';
+import { Award, Star, Coins, RotateCcw, Printer, CheckCircle2, Trophy, ArrowRight, LayoutDashboard, Sparkles, Unlock } from 'lucide-react';
 import { CharacterGuide } from '../CharacterGuide';
 import { PlayerScore, RoundConfig } from '../../types/game';
 import { sound } from '../../utils/soundEngine';
@@ -9,12 +9,16 @@ interface CelebrationModalProps {
   score: PlayerScore;
   config: RoundConfig;
   onPlayAgain: () => void;
+  onProceedToLevel2: () => void;
+  onGoToDashboard: () => void;
 }
 
 export const CelebrationModal: React.FC<CelebrationModalProps> = ({
   score,
   config,
   onPlayAgain,
+  onProceedToLevel2,
+  onGoToDashboard,
 }) => {
   const [playerName, setPlayerName] = useState('Cargo Champion');
   const [isEditingName, setIsEditingName] = useState(false);
@@ -221,28 +225,74 @@ export const CelebrationModal: React.FC<CelebrationModalProps> = ({
           </div>
         </div>
 
-        {/* Certificate Actions */}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 print:hidden">
+        {/* Level 2 Unlocked Callout Banner */}
+        <div className="mt-6 p-4 rounded-2xl bg-gradient-to-r from-cyan-950/80 via-teal-900/80 to-blue-950/80 border-2 border-cyan-400 flex flex-col sm:flex-row items-center justify-between gap-4 print:hidden shadow-xl animate-in zoom-in-95">
+          <div className="flex items-center gap-3 text-center sm:text-left">
+            <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-400 flex items-center justify-center flex-shrink-0 text-2xl">
+              <Unlock className="w-6 h-6 text-cyan-300 animate-bounce" />
+            </div>
+            <div>
+              <span className="text-[11px] font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1 justify-center sm:justify-start">
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                Achievement: Level 2 Unlocked!
+              </span>
+              <h4 className="text-lg font-black text-white font-heading">
+                Ready to become a Junior Port Captain?
+              </h4>
+              <p className="text-xs text-slate-300">
+                Explore science, port maths, green energy, safety and Captain Buddy's 30 challenges!
+              </p>
+            </div>
+          </div>
+
           <button
-            onClick={handlePrint}
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm border border-slate-700 cursor-pointer transition"
+            onClick={() => {
+              sound.playSuccessFanfare();
+              onProceedToLevel2();
+            }}
+            className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-500 hover:from-cyan-300 hover:to-teal-300 text-slate-950 font-black text-base shadow-xl font-heading cursor-pointer active:scale-95 transition"
           >
-            <Printer className="w-4 h-4 text-cyan-400" />
-            <span>Print or Save Certificate</span>
+            <span>START LEVEL 2: JUNIOR PORT CAPTAIN</span>
+            <ArrowRight className="w-5 h-5" />
           </button>
+        </div>
+
+        {/* Certificate Actions & Replay Buttons */}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 print:hidden">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handlePrint}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm border border-slate-700 cursor-pointer transition"
+            >
+              <Printer className="w-4 h-4 text-cyan-400" />
+              <span>Print or Save Certificate</span>
+            </button>
+
+            <button
+              onClick={() => {
+                sound.playClick();
+                onGoToDashboard();
+              }}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm border border-slate-700 cursor-pointer transition"
+            >
+              <LayoutDashboard className="w-4 h-4 text-amber-400" />
+              <span>Main Dashboard</span>
+            </button>
+          </div>
 
           <button
             onClick={() => {
               sound.playClick();
               onPlayAgain();
             }}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-base shadow-xl font-heading cursor-pointer active:scale-95 transition"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-sm shadow-xl font-heading cursor-pointer active:scale-95 transition"
           >
-            <RotateCcw className="w-5 h-5" />
-            <span>PLAY AGAIN WITH NEW MISSION</span>
+            <RotateCcw className="w-4 h-4" />
+            <span>REPLAY LEVEL 1 MISSION</span>
           </button>
         </div>
       </div>
     </div>
   );
 };
+
