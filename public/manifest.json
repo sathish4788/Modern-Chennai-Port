@@ -2,13 +2,15 @@
   "id": "/",
   "name": "Modern Chennai Port - Porter Game",
   "short_name": "ChennaiPort",
-  "description": "The Great Cargo Adventure! An interactive math logistics game: Count It. Load It. Ship It. Deliver It!",
+  "description": "The Great Cargo Adventure! An interactive math & science logistics game for kids: Count It. Load It. Ship It. Deliver It!",
   "theme_color": "#0284c7",
   "background_color": "#0f172a",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "any",
   "start_url": "/",
   "scope": "/",
+  "prefer_related_applications": false,
   "categories": ["education", "games", "kids"],
   "icons": [
     {
@@ -28,6 +30,15 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Game",
+      "short_name": "Play",
+      "description": "Start Modern Chennai Port journey",
+      "url": "/",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
     }
   ]
 }

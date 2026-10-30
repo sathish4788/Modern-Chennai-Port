@@ -20,9 +20,11 @@ export default defineConfig(() => {
           theme_color: '#0284c7',
           background_color: '#0f172a',
           display: 'standalone',
+          display_override: ['window-controls-overlay', 'standalone', 'minimal-ui'],
           orientation: 'any',
           start_url: '/',
           scope: '/',
+          prefer_related_applications: false,
           icons: [
             {
               src: '/pwa-192x192.png',
